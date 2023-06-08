@@ -17,6 +17,9 @@
     * [ ] form을 변경할 때는 Props를 State로 전환 후 onChange를 이용합니다.
 
 
+            $cd begin-react
+            &yarn start
+
 <br />
 <br />
 <br />
