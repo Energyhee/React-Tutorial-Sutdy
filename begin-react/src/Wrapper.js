@@ -1,18 +1,20 @@
 import React from 'react';
 
-function Wrap (){
+// #0
+function Wrapper ({children}){
     const style = {
         display: 'inline-block',
         padding: '15px',
         backgroundColor : '#333',
         textAlign: 'center',
-        fontSize: '16px'
+        fontSize: '16px',
+        color: '#fff'
     }
     return (
         <div style={style}>
-            
+            {children}
         </div>
     )
 }
 
-export default Wrap;
+export default Wrapper;
