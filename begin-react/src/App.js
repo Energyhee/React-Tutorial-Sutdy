@@ -4,6 +4,7 @@ import Wrapper from './Wrapper';
 import Counter from './Counter';
 import InputSample from './InputSample';
 import InputSample2 from './InputSample2';
+import InputSample3 from './InputSample3';
 import './App.css';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Counter />
         <InputSample />
         <InputSample2 />
+        <InputSample3 />
         </>
     );
 }
