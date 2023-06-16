@@ -34,6 +34,7 @@ function InputSample3(){
     
     return (
         <div className="test">
+            <h2>10. useRef 로 특정 DOM 선택하기</h2>
             <div className="row">
                 <p>이름</p>
                 <input 

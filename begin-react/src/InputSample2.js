@@ -30,6 +30,7 @@ function InputSample2(){
     
     return (
         <div className="test">
+            <h2>09. 여러개의 input 상태 관리하기</h2>
             <div className="row">
                 <p>이름</p>
                 <input name="name" placeholder="이름" onChange={onChangeTxt} value={name}/>

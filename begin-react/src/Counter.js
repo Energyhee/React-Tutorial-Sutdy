@@ -16,7 +16,9 @@ function Counter (){
 
     return (
         <div>
-            <h1>{number}</h1>
+            <h2>07. useState 를 통해 컴포넌트에서 바뀌는 값 관리하기</h2>
+            <h4>이벤트 설정 및 동적 값 끼얹기, 함수형 업데이트</h4>
+            <p>{number}</p>
             <button onClick={onPlus}>+1</button> {/* on이벤트명 */}
             <button onClick={onMinus}>-1</button>
         </div>

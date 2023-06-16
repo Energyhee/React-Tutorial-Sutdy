@@ -12,6 +12,7 @@ function InputSample(){
     
     return (
         <div>
+            <h2>08. input 상태 관리하기</h2>
             <input onChange={onChangeTxt} value={text}/>
             <button onClick={onResetTxt}>초기화</button>
             <div>

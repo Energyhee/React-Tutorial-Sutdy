@@ -6,6 +6,7 @@ function Hello({cName, color, name, state}){
     return (
         <div className={cName} style={{color: color}}>
             {/* {state ? <b>*</b> : null} 안녕하세요 {name} */}
+            <h2>06. 조건부 렌더링</h2>
             {state && <b>*</b>} 안녕하세요 {name} {/* 단축평가논리 */}
         </div>
     );
