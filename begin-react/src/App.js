@@ -15,8 +15,7 @@ function App() {
         color: 'white',
         fontSize: '16px',
         padding: '1rem'
-    }
-    // java script 는 중괄호를 이용하여 감싸주어야 한다.
+    };
 
     return (
         <>
@@ -39,16 +38,20 @@ function App() {
             </>
         </Wrapper>
         <br />
+        {/* <p>useState 를 통해 컴포넌트에서 바뀌는 값 관리하기</p> */}
         <Counter />
         <br />
+        {/* <p>input 상태 관리하기</p> */}
         <InputSample />
         <br />
+        {/* <p>여러개의 input 상태 관리하기</p> */}
         <InputSample2 />
         <br />
+        {/* <p>useRef 로 특정 DOM 선택하기</p> */}
         <InputSample3 />
         <br />
+        {/* <p>배열로 렌더링하기</p> */}
         <UserList />
-        <br />
         </>
     );
 }
