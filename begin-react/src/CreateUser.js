@@ -4,7 +4,6 @@ function CreateUser({name, phone, onChange, onCreate}){
     return (
         <div>
             <h2>13. 배열에 항목 추가하기</h2>
-            <h4></h4>
             <input
                 name="name"
                 placeholder="계정명"
@@ -13,7 +12,7 @@ function CreateUser({name, phone, onChange, onCreate}){
             />
             <input
                 name="phone"
-                placeholder="이메일"
+                placeholder="전화번호"
                 onChange={onChange}
                 value={phone}
             />
