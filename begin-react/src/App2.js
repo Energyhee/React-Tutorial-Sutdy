@@ -6,7 +6,7 @@ import './App.css';
 
 function countActiveUsers(infos){
     console.log('활성 사용자 수를 세는 중...');
-    return infos.filter(info => info.active).length;
+    return infos.filter(info => info.active).length; // info 객체
 }
 
 function App2() {
@@ -80,9 +80,10 @@ function App2() {
         setUsers(info.map(inId => inId.id === id ? { ...inId, active : !inId.active } : inId));
     }
 
-    // useMemo 라는 HOOK 함수를 사용하면 성능을 최적하 가능
+    // useMemo 라는 HOOK 함수를 사용하면 성능을 최적화 가능
     // 이전에 계산 한 값을 재사용한다는 의미를 가지고 있다.
-    const countNum = useMemo(() => countActiveUsers(info), [info]);
+    // userMemo 첫번째 파라미터는 어떻게 연산할지, 두번째 파라미터는 deps 배열을 넣어주면 되는데 이 배열 안에 넣은 내용이 바뀌면 등록한 함수를 호출해서 값을 연산해주고 바뀌 내용이 없다면 이전에 연산한 값을 재사용한다.
+    const countNum = useMemo(() => countActiveUsers(info), [info]); 
 
     return (
         <>

@@ -15,7 +15,7 @@ function UserMake3({opt, onRemove, onToggle}){
     //     }
     // }, [opt]);
     useEffect(() => {
-        console.log(opt);
+        // console.log(opt);
     });
 
     return (
