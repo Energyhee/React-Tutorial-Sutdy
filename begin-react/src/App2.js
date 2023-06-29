@@ -1,4 +1,4 @@
-import React, {useRef, useState, useMemo} from 'react';
+import React, {useRef, useState, useMemo, useCallback} from 'react';
 import UserList2 from './UserList2';
 import UserList3 from './UserList3';
 import CreateUser from './CreateUser';
@@ -19,13 +19,28 @@ function App2() {
 
     const {name, phone} = inputs;
     
-    const onChange = e => {
-        const {name, value} = e.target;
-        setInputs({
-            ...inputs,
-            [name] : value
-        });
-    };
+    // useCallback 주의 점은 함수 안에서 사용하는 상태 혹은 props가 있다면, 꼭 deps 배열안에 포함 시켜야 된다.
+    // deps 배열 안에 함수에서 사용하는 값을 넣지 않게 된다면, 함수 내에서 해당 값들을 참조할때 가장 최신 값을 참조 할 것이라는 보장이 없다.
+    // props로 받아온 함수가 있다면, 이또한 deps에 넣어줘야 한다.
+    // useCallback은 useMemo를 기반으로 만들어졌다. 다만 함수를 위해서 사용 할 때 더욱 편하게 해준 것
+    // 아래와 같이 표현이 가능하다.
+    // const uesd = useCallback(
+    //     () => () => {
+    //
+    //     },
+    //     [deps]
+    // );
+    
+    const onChange = useCallback(
+        e => {
+            const {name, value} = e.target;
+            setInputs({
+                ...inputs,
+                [name] : value
+            });
+        },
+        [inputs]
+    );
 
     const [info, setUsers] = useState(
         [
@@ -52,36 +67,46 @@ function App2() {
 
     // 컴포넌트의 state 또는 prop가 변경될 때마다 호출(리렌더링)되는데, 
     // useRef는 React의 전역저장소에 저장되기 때문에 마지막으로 업데이트 된 current 값(65번째 줄)을 유지
-    const nextId = useRef(3);
+    const nextId = useRef(4);
     
-    const onCreate = () => {
-        const user = {
-            id : nextId.current,
-            name,
-            phone            
-        }
-
-        setUsers([...info, user]);
-
-        setInputs({
-            name : '',
-            phone : ''
-        });
-        nextId.current += 1; // useRef 값 + 1 씩하여 업데이트
-    };
+    const onCreate = useCallback(() => {
+            const user = {
+                id : nextId.current,
+                name,
+                phone            
+            }
     
-    const onRemove = id => {
-        setUsers(info.filter(inId => inId.id !== id)); // info 배열
-    };
+            setUsers([...info, user]);
+    
+            setInputs({
+                name : '',
+                phone : ''
+            });
+            nextId.current += 1; // useRef 값 + 1 씩하여 업데이트
+        }, 
+        [info, name, phone]
+    );
+    
+    const onRemove = useCallback(
+        id => {
+            setUsers(info.filter(inId => inId.id !== id)); // info 배열
+        },
+        [info]
+    );
 
-    const onToggle = id => {
-        // 배열의 불변성을 유지하면서 배열을 업데이트 할 때에도 map 함수를 사용 할 수 있다.
-        // id값을 비교해서 id가 다르다면 그대로 두고, 같다면 active 값을 반전 시킨다.
-        setUsers(info.map(inId => inId.id === id ? { ...inId, active : !inId.active } : inId));
-    }
+    const onToggle = useCallback(
+        id => {
+            // 배열의 불변성을 유지하면서 배열을 업데이트 할 때에도 map 함수를 사용 할 수 있다.
+            // id값을 비교해서 id가 다르다면 그대로 두고, 같다면 active 값을 반전 시킨다.
+            setUsers(info.map(inId => 
+                inId.id === id ? { ...inId, active : !inId.active } : inId
+            ));
+        },
+        [info]
+    );
 
     // useMemo 라는 HOOK 함수를 사용하면 성능을 최적화 가능
-    // 이전에 계산 한 값을 재사용한다는 의미를 가지고 있다.
+    // 이전에 계산 한 결과값을 재사용한다는 의미를 가지고 있다.
     // userMemo 첫번째 파라미터는 어떻게 연산할지, 두번째 파라미터는 deps 배열을 넣어주면 되는데 이 배열 안에 넣은 내용이 바뀌면 등록한 함수를 호출해서 값을 연산해주고 바뀌 내용이 없다면 이전에 연산한 값을 재사용한다.
     const countNum = useMemo(() => countActiveUsers(info), [info]); 
 
