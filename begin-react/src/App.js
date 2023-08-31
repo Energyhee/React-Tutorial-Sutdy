@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import './App.css';
 
 /*
@@ -27,64 +28,75 @@ function UserInfomation() {
         color : 'white'
     }
 
-    // wrapper style
-    const baseCont = {
-        display : 'flex',
-        alingItems : 'center',
-        justifyContent : 'center',
-        flexDirection : 'column',
-        gap : '10px 0'
-    }
-
-    // text style
-    const baseTxt = {
-        margin : '0',
-        padding : '0',
-        textAlign : 'center',
-        fontSize : '14px',
-        lineHeight : '18px',
-        letterSpacing : '-.5px'
-    }
-
-    // image style
-    const thumbStyle = {
-        margin : '0 auto',
-        width : '80px',
-        height : '80px',
-        borderRadius : '100%',
-        overflow : 'hidden'
-    }
-
     // user info
     const user = {
         src : 'https://i.imgur.com/yXOvdOSs.jpg',
         name : 'Hedy Lamarr',
         age : '31'
     }
+
+    // user data set
+    const userData = [
+        { id : 1, isBg : true, title : 'Call', data: '010-1234-1234' },
+        { id : 2, isBg : true, title : 'Address', data: '(08363) 1149, Ori-ro, Guro-gu, Seoul, Republic of Korea' },
+        { id : 3, isBg : true, title : 'Height', data: '177cm' },
+        { id : 4, isBg : true, title : 'Weight', data: '65kg' }
+    ]
+
+    // user data make
+    const dataMake = userData.map(opt => 
+        <li key={opt.id}  style={{ backgroundColor : opt.isBg && '#eee'}}>
+            <div className='flex'>
+                <div className='col tit'><strong>{opt.title}</strong></div>
+                <div className='col cont'>{opt.data}</div>
+            </div>
+        </li>
+    );
+
+    // button event
+    const [count, setCount] = useState(0);
+    function handleClickMinus(){
+        count > 0 && setCount(count - 1);
+    }
+    function handleClickPlus(){
+        count < 10 && setCount(count + 1);
+    }
+    function handleClickBtn(){
+        alert('Click !');
+    }
+
+    let isLogin = false;
+
     return (
-        <>
+        <div className="wrapper">
             <h2 className="sub-tit" style={titleStyle}>User Profile</h2>
-            <div className="user-info" style={baseCont}>
+            <div className="user-info">
                 <img 
                     className="thumb" 
                     src={user.src} 
-                    style={thumbStyle} 
                     alt={'photo of ' + user.name}
                 />
-                <p className="name" style={baseTxt}>{user.name}</p>
-                <p className="age" style={baseTxt}>{user.age}</p>
+                <p className="name txt">{user.name}</p>
+                <p className="age txt">{user.age}</p>
             </div>
-            <div className='btn-wrap' style={{textAlign: 'right', marginTop: '20px'}}>
-                <button type="button" style={{width : '60px', height : '30px'}}>edit</button>
+
+            <ul className="userData">{dataMake}</ul>
+
+            <br />
+            <p>click count : {count}</p>
+
+            <div className="btn-wrap" style={{paddingTop: '20px', marginTop: '20px', borderTop: '1px solid #ddd'}}>
+                <button type="button" onClick={handleClickMinus}>Minus</button>
+                <button type="button" onClick={handleClickPlus}>plus</button>
+                <button type="button" onClick={handleClickBtn} className={isLogin ? 'edit' : 'base'}>{isLogin ? 'EDIT' : 'LOGIN'}</button>
             </div>
-        </>
+        </div>
     );
 }
 
 export default function MyApp(){
     return (
         <>
-            <h1>React Study</h1>
             <UserInfomation />
         </>
     );
