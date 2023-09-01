@@ -18,16 +18,6 @@ import './App.css';
 */
 
 function UserInfomation() {
-    // title style
-    const titleStyle = {
-        backgroundColor : 'black',
-        textAlign : 'center',
-        fontSize : '20px',
-        fontWeight : 'bold',
-        lineheight : '24px',
-        color : 'white'
-    }
-
     // user info
     const user = {
         src : 'https://i.imgur.com/yXOvdOSs.jpg',
@@ -69,7 +59,7 @@ function UserInfomation() {
 
     return (
         <div className="wrapper">
-            <h2 className="sub-tit" style={titleStyle}>User Profile</h2>
+            <h2 className="sub-tit">User Profile</h2>
             <div className="user-info">
                 <img 
                     className="thumb" 

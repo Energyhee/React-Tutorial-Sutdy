@@ -19,7 +19,7 @@ select::-ms-expand {display:none;}
 body,html{ font-size: 16px; font-weight: 400; line-height: 1.4; letter-spacing: -.5px; color: #333; word-break:keep-all; word-wrap:break-word; white-space:normal; -webkit-overflow-scrolling: touch; }
 
 .wrapper { padding: 20px; }
-.sub-tit { color: red; }
+.sub-tit { background-color: #333; text-align: center; font-size: 20px; font-weight: bold; line-height: 24px; color: #fff; }
 .flex { display: flex; align-items: flex-start; }
 .flex .col { flex: 1; padding: 10px; }
 .flex .col.tit { flex: 0 100px; }

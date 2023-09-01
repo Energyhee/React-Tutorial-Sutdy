@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import './App.css';
 import './Ttt.css';
 
 
@@ -59,7 +60,8 @@ export default function MyTtt() {
     };
 
     return (
-        <>
+        <div className="wrapper">
+            <h2 className="sub-tit">Tic-Tac-Toe</h2>
             <div className="status">{status}</div>
             <div className="t-wrap">
                 <div className="t-row">
@@ -78,6 +80,6 @@ export default function MyTtt() {
                     <Square value={squares[8]} btnSquareClick={() => btnClick(8)} />
                 </div>
             </div>
-        </>
+        </div>
     );
 }
