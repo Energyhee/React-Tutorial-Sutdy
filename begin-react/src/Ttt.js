@@ -1,32 +1,83 @@
 import React from 'react';
 import { useState } from 'react';
-import './App.css';
+import './Ttt.css';
 
-/*
-@ React Rule (기초)
-    1. component 대문자
-    2. HTML 태그 소문자
-    3. Mark Up은 JSX 구문으로 작성하며, 매우 엄격하게 지켜져야 한다.
-        1) 태그는 무조건 닫혀 있어야 한다.
-        2) 단일태그(<br>, <input>, ...) 태그들은 Self Closing 해주어야 한다.
-        3) 두개 이상의 태그는 무조건 하나의 태그로 감싸주어야 한다.
-            - 태그 → 노출
-        4) Fragment(<> </>) 형식으로 감싸줄 수 있다.
-            - Fragment → 미노출
-        5) inline style 객체 형태 작성 및 camelCase 네이밍
-        6) class 작성은 className 
-*/
 
-function TicTacToe() {
+function Square({value, btnSquareClick}) {
     return (
-        <p>Tic-Tac-Toe</p>
+        <button 
+            type="button" 
+            className="square" 
+            onClick={btnSquareClick}
+        >
+            {value}
+        </button>
     )
 }
 
-export default function MyApp(){
+function calculateWinner(squares) {
+    const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ];
+
+    for(let i = 0; i < lines.length; i++){
+        const [a, b, c] = lines[i];
+
+        if(squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) return squares[a];
+    }
+
+    return null;
+}
+
+export default function MyTtt() {
+    const [xIsNext, setXIsNext] = useState(true);
+    const [squares, setSquares] = useState(Array(9).fill(null));
+    const winner = calculateWinner(squares);
+    let status;
+    if(winner){
+        status = 'Winner : ' + winner;
+    }else{
+        status = 'Next player : ' + (xIsNext ? 'X' : 'O');
+    }
+
+    function btnClick(i){
+        if(squares[i] || calculateWinner(squares)) return;
+
+        const nextSquares = squares.slice();
+
+        nextSquares[i] =  (xIsNext) ? "X" : "O"; 
+
+        setSquares(nextSquares);
+        setXIsNext(!xIsNext);
+    };
+
     return (
         <>
-            <TicTacToe />
+            <div className="status">{status}</div>
+            <div className="t-wrap">
+                <div className="t-row">
+                    <Square value={squares[0]} btnSquareClick={() => btnClick(0)} />
+                    <Square value={squares[1]} btnSquareClick={() => btnClick(1)} />
+                    <Square value={squares[2]} btnSquareClick={() => btnClick(2)} />
+                </div>
+                <div className="t-row">
+                    <Square value={squares[3]} btnSquareClick={() => btnClick(3)} />
+                    <Square value={squares[4]} btnSquareClick={() => btnClick(4)} />
+                    <Square value={squares[5]} btnSquareClick={() => btnClick(5)} />
+                </div>
+                <div className="t-row">
+                    <Square value={squares[6]} btnSquareClick={() => btnClick(6)} />
+                    <Square value={squares[7]} btnSquareClick={() => btnClick(7)} />
+                    <Square value={squares[8]} btnSquareClick={() => btnClick(8)} />
+                </div>
+            </div>
         </>
     );
 }
