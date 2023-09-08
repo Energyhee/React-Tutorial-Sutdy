@@ -1,4 +1,7 @@
 .t-wrap { width: 90px; margin: 0 auto; border: 1px solid #ddd; }
 .t-row:after { content: ''; display: block; clear: both; }
-.square { float: left; position: relative; display: flex; align-items: center; justify-content: center; width: calc(100% / 3); height: 30px; margin: 0; padding: 0; background-color: transparent; font-size: 14px; font-weight: 700; color: #000; }
-.square:before { content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 1px solid #ddd; pointer-events: none; }
+.square { float: left; position: relative; display: flex; align-items: center; justify-content: center; width: calc(100% / 3); height: 30px; margin: 0; padding: 0; border: 1px solid #eee; box-sizing: border-box; background-color: transparent; font-size: 14px; font-weight: 700; color: #000; }
+.square:before,
+.square:after { content: ''; position: absolute; left: 50%; top: 50%; z-index: -1; width: 40px;; border: 1px solid #eee; pointer-events: none; }
+.square:before { transform: translate(-50%, -50%) rotate(45deg); }
+.square:after { transform: translate(-50%, -50%) rotate(-45deg); }
