@@ -61,6 +61,12 @@ export default function MyTtt() {
             <h2 className="sub-tit">Tic-Tac-Toe</h2>
             <div className="status">{status}</div>
             <div className="t-wrap">
+                <span className="line"></span>
+                <span className="line"></span>
+                <span className="line"></span>
+                <span className="line"></span>
+                <span className="line"></span>
+                <span className="line"></span>
                 <div className="t-row">
                     <Square value={squares[0]} btnSquareClick={() => btnClick(0)} />
                     <Square value={squares[1]} btnSquareClick={() => btnClick(1)} />

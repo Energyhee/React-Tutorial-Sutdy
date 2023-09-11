@@ -1,4 +1,11 @@
-.t-wrap { width: 90px; margin: 0 auto; border: 1px solid #ddd; }
+.t-wrap { position: relative; width: 90px; margin: 0 auto; border: 1px solid #ddd; }
+.t-wrap .line { position: absolute; background-color: #eee; }
+.t-wrap .line:nth-child(1) { left: 15px; top: 0; width: 1px; height: 100%; }
+.t-wrap .line:nth-child(2) { left: 50%; top: 0; width: 1px; height: 100%; }
+.t-wrap .line:nth-child(3) { right: 15px; top: 0; width: 1px; height: 100%; }
+.t-wrap .line:nth-child(4) { left: 0; top: 15px; width: 100%; height: 1px; }
+.t-wrap .line:nth-child(5) { left: 0; top: 50%; width: 100%; height: 1px; }
+.t-wrap .line:nth-child(6) { left: 0; bottom: 15px; width: 100%; height: 1px; }
 .t-row:after { content: ''; display: block; clear: both; }
 .square { float: left; position: relative; display: flex; align-items: center; justify-content: center; width: calc(100% / 3); height: 30px; margin: 0; padding: 0; border: 1px solid #eee; box-sizing: border-box; background-color: transparent; font-size: 14px; font-weight: 700; color: #000; }
 .square:before,
