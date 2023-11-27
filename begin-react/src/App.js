@@ -17,6 +17,26 @@ import './App.css';
         6) class 작성은 className 
 */
 
+function AddClass(e, n){
+    if(!e.target.classList.contains(n)){
+        e.target.classList.add(n);
+    }
+}
+
+function RemoveClass(e, n){
+    if(e.target.classList.contains(n)){
+        e.target.classList.remove(n);
+    }
+}
+
+function ToggleEvent(e, n){
+    if(e.target.classList.contains(n)){
+        e.target.classList.remove(n);
+    }else{
+        e.target.classList.add(n);
+    }
+}
+
 function UserInfomation() {
     // user info
     const user = {
@@ -45,11 +65,13 @@ function UserInfomation() {
 
     // button event
     const [count, setCount] = useState(0);
+    const setMinLimit = 0;
+    const setMaxLimit = 20;
     function handleClickMinus(){
-        count > 0 && setCount(count - 1);
+        count > setMinLimit && setCount(count - 1);
     }
     function handleClickPlus(){
-        count < 10 && setCount(count + 1);
+        count < setMaxLimit && setCount(count + 1);
     }
     function handleClickBtn(){
         alert('Click !');
@@ -59,7 +81,7 @@ function UserInfomation() {
 
     return (
         <div className="wrapper">
-            <h2 className="sub-tit">User Profile</h2>
+            <h2 className="sub-tit" onClick={(e) => ToggleEvent(e, 'active')}>User Profile</h2>
             <div className="user-info">
                 <img 
                     className="thumb" 
